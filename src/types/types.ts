@@ -1,5 +1,5 @@
 export interface ResponsiveFolders {
   message: string;
   statusCode: number;
-  data: string[];
+  data: { folders: string[]; files: string[] };
 }

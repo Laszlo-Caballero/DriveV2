@@ -3,6 +3,11 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        monserrat: ["--monserrat", "sans-serif"],
+        monserratMedium: ["--monserrat-medium", "sans-serif"],
+        monserratSemibold: ["--monserrat-semibold", "sans-serif"],
+      },
       colors: {
         "shadow-green": {
           50: "#f4f9f8",
@@ -30,6 +35,10 @@ export default {
           800: "#2c47a1",
           900: "#283f80",
           950: "#1c274c",
+        },
+        "blue-ribbon": {
+          300: "#B9E3FF",
+          400: "#2A99FF",
         },
       },
     },
