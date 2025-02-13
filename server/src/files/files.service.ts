@@ -28,7 +28,10 @@ export class FilesService {
       .sort()
       .reverse();
 
-    return [...folders, ...contentFiles];
+    return {
+      folders,
+      files: contentFiles,
+    };
   }
 
   async allFiles(dir: string) {
