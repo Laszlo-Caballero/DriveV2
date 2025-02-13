@@ -2,18 +2,15 @@ import { FC, SVGProps } from "react";
 export const CheckIcon: FC<SVGProps<SVGSVGElement>> = ({ ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="800px"
-    height="800px"
-    viewBox="0 0 24 24"
+    viewBox="0 0 25 25"
     fill="none"
     {...props}
   >
     <path
-      d="M4 12.6111L8.92308 17.5L20 6.5"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M25 12.5C25 19.4035 19.4035 25 12.5 25C5.59644 25 0 19.4035 0 12.5C0 5.59644 5.59644 0 12.5 0C19.4035 0 25 5.59644 25 12.5ZM17.5379 8.71209C17.904 9.0782 17.904 9.6718 17.5379 10.0379L11.2879 16.2879C10.9218 16.654 10.3283 16.654 9.96209 16.2879L7.46209 13.7879C7.09597 13.4218 7.09597 12.8282 7.46209 12.4621C7.8282 12.096 8.4218 12.096 8.78791 12.4621L10.625 14.2991L13.4185 11.5056L16.2121 8.71209C16.5782 8.34598 17.1718 8.34598 17.5379 8.71209Z"
+      fill="currentColor"
     />
   </svg>
 );
