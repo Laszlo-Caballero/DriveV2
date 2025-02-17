@@ -37,35 +37,33 @@ export default function FolderPage() {
   const { data, isLoading } = useQuery<ResponsiveFolders>({
     queryFn: async () => {
       const responsive = await axios.get(
-        `${config.apiUrl}/files/carpets/${params["*"]}`
+        `${config.apiUrl}/files/carpets/${params["*"]}`,
       );
       return responsive.data;
     },
     dependencies: [addFolder, deleteFile, params, files],
   });
 
-  if (isLoading) return <div className="w-full h-full p-4">loading...</div>;
+  if (isLoading) return <div className="h-full w-full p-4">loading...</div>;
 
   return (
     <div
-      className="w-full h-full p-4 gap-y-4 flex flex-col py-[48px] px-[22px] relative"
+      className="relative flex h-full w-full flex-col gap-y-4 p-4 px-[22px] py-[48px]"
       {...getRootProps({ onClick: (e) => e.stopPropagation() })}
     >
-      <input className="hidden w-0 h-0" {...getInputProps()} />
+      <input className="hidden h-0 w-0" {...getInputProps()} />
 
       <h2 className="font-monserrat text-6xl">Unidad</h2>
 
-      <div className="grid grid-cols-5 gap-8 mt-8">
-        <h4 className="font-monserrat text-2xl col-span-5">Carpetas</h4>
+      <div className="mt-8 grid grid-cols-5 gap-8">
+        <h4 className="col-span-5 font-monserrat text-2xl">Carpetas</h4>
         {data?.data.folders.map((folder, i) => (
           <Folder title={folder} key={i} />
         ))}
       </div>
-      <div className="grid grid-cols-5 gap-8 mt-8">
-        <h4 className="font-monserrat text-2xl col-span-5">Archivos</h4>
-        {data?.data.files.map((folder, i) => (
-          <File title={folder} key={i} />
-        ))}
+      <div className="mt-8 grid grid-cols-5 gap-8">
+        <h4 className="col-span-5 font-monserrat text-2xl">Archivos</h4>
+        {data?.data.files.map((folder, i) => <File title={folder} key={i} />)}
       </div>
       {isDragActive && <DropFile folder={params["*"] || "Carpeta"} />}
       {files.length > 0 && <UploadFiles files={files} setFiles={setFiles} />}
