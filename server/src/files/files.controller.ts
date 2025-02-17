@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Res,
   UploadedFiles,
   UseInterceptors,
@@ -15,6 +16,7 @@ import { CreateFolderDto } from './dto/createFolder.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { DeleteFilesDto } from './dto/deleteFiles.dto';
 import { Response } from 'express';
+import { RenameFileDto } from './dto/renameFile.dto';
 
 @Controller('files')
 export class FilesController {
@@ -48,5 +50,10 @@ export class FilesController {
   async downloadFile(@Param() dir: ParamsPath, @Res() res: Response) {
     const filePath = await this.filesServices.getFilePath(dir[0]);
     res.sendFile(filePath);
+  }
+
+  @Put('rename/*')
+  async renameFile(@Param() dir: ParamsPath, @Body() files: RenameFileDto) {
+    return this.filesServices.renameFile(dir[0], files);
   }
 }

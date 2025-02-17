@@ -3,11 +3,19 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { readdir, mkdir, writeFile, unlink, rm } from 'node:fs/promises';
+import {
+  readdir,
+  mkdir,
+  writeFile,
+  unlink,
+  rm,
+  rename,
+} from 'node:fs/promises';
 import { join } from 'node:path';
 import { existsSync } from 'fs';
 import { DeleteFilesDto } from './dto/deleteFiles.dto';
 import { accessSync } from 'node:fs';
+import { RenameFileDto } from './dto/renameFile.dto';
 
 @Injectable()
 export class FilesService {
@@ -141,6 +149,30 @@ export class FilesService {
 
       return {
         message: 'Folder removed',
+        statusCode: 200,
+      };
+    } catch {
+      throw new BadRequestException('File not found');
+    }
+  }
+
+  async renameFile(dir: string, file: RenameFileDto) {
+    const decodedDir = decodeURIComponent(dir);
+    const path = join(this.path, decodedDir);
+
+    const isExist = existsSync(path);
+    if (!isExist) {
+      throw new BadRequestException('File not exist');
+    }
+
+    try {
+      const oldPath = join(path, file.name);
+      const newPath = join(path, file.newName);
+
+      await rename(oldPath, newPath);
+
+      return {
+        message: 'File renamed',
         statusCode: 200,
       };
     } catch {
