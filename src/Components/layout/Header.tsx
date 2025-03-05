@@ -2,12 +2,12 @@ import { useFolder } from "../../Context/FolderContext";
 import Button from "../ui/Button/Button";
 
 export default function Header() {
-  const { setAddFolderBoolean } = useFolder();
+  const { setAddFolder } = useFolder();
 
   return (
-    <nav className="w-full flex items-center gap-x-4 p-4 bg-shadow-green-400 text-white">
+    <nav className="flex w-full items-center gap-x-4 bg-shadow-green-400 p-4 text-white">
       <Button>Subir Archivo</Button>
-      <Button onClick={() => setAddFolderBoolean(true)}>Crear Carpeta</Button>
+      <Button onClick={() => setAddFolder(true)}>Crear Carpeta</Button>
     </nav>
   );
 }

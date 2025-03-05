@@ -11,6 +11,7 @@ import DropFile from "../Components/ui/DropFile/DropFile";
 import UploadFiles from "../Components/ui/UploadFiles/UploadFiles";
 import { useState } from "react";
 import { FileUpload, stateUpload } from "../interfaces/types";
+import MenuClick from "@/Components/ui/MenuClick/MenuClick";
 
 export default function FolderPage() {
   const { addFolder, deleteFile } = useFolder();
@@ -44,13 +45,45 @@ export default function FolderPage() {
     dependencies: [addFolder, deleteFile, params, files],
   });
 
+  const [open, setOpen] = useState({
+    open: false,
+    x: 0,
+    y: 0,
+  });
+
   if (isLoading) return <div className="h-full w-full p-4">loading...</div>;
 
   return (
     <div
       className="relative flex h-full w-full flex-col gap-y-4 p-4 px-[22px] py-[48px]"
-      {...getRootProps({ onClick: (e) => e.stopPropagation() })}
+      {...getRootProps({
+        onClick: (e) => e.stopPropagation(),
+        onContextMenu: (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          console.log(e.clientX, e.clientY);
+          setOpen({
+            open: true,
+            x: e.clientX,
+            y: e.clientY,
+          });
+        },
+      })}
     >
+      {open.open && (
+        <MenuClick
+          x={open.x}
+          y={open.y}
+          closeFunction={() => {
+            setOpen({
+              open: false,
+              x: 0,
+              y: 0,
+            });
+          }}
+        />
+      )}
+
       <input className="hidden h-0 w-0" {...getInputProps()} />
 
       <h2 className="font-monserrat text-6xl">Unidad</h2>

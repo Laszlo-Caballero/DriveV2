@@ -15,6 +15,7 @@ export default function File({ title }: Props) {
   const [modalRename, setModalRename] = useState(false);
   const [modalMove, setModalMove] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
+
   return (
     <div
       className="relative flex items-center justify-between rounded-2xl bg-blue-ribbon-300 px-5 py-3"

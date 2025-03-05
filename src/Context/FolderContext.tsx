@@ -2,7 +2,7 @@ import { createContext, PropsWithChildren, useContext, useState } from "react";
 
 type FolderContextType = {
   addFolder: boolean;
-  setAddFolderBoolean: (value: boolean) => void;
+  setAddFolder: (value: boolean) => void;
   deleteFile: boolean;
   setDeleteFile: (value: boolean) => void;
 };
@@ -13,13 +13,9 @@ export function FolderProvider({ children }: PropsWithChildren) {
   const [addFolder, setAddFolder] = useState(false);
   const [deleteFile, setDeleteFile] = useState(false);
 
-  const setAddFolderBoolean = (value: boolean) => {
-    setAddFolder(value);
-  };
-
   return (
     <FolderContext.Provider
-      value={{ addFolder, setAddFolderBoolean, deleteFile, setDeleteFile }}
+      value={{ addFolder, setAddFolder, deleteFile, setDeleteFile }}
     >
       {children}
     </FolderContext.Provider>

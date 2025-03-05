@@ -8,12 +8,11 @@ import { FormEvent, useState } from "react";
 import { useParams } from "react-router";
 
 interface Props {
-  title: string;
   onClose: () => void;
 }
 
-export default function ModalRename({ title, onClose }: Props) {
-  const [name, setName] = useState(title.split(".")[0]);
+export default function ModalNewFolder({ onClose }: Props) {
+  const [name, setName] = useState("");
   const [errors, setErrors] = useState<string>("");
   const toast = Toast();
 
@@ -32,29 +31,28 @@ export default function ModalRename({ title, onClose }: Props) {
     }
 
     try {
-      await axios.put(`${config.apiUrl}/files/rename/${params["*"]}`, {
-        name: title,
-        newName: `${name}.${title.split(".")[1]}`,
+      await axios.post(`${config.apiUrl}/files/folder/${params["*"]}`, {
+        name: name,
       });
-      toast.success("Archivo renombrado correctamente");
+      toast.success("Nueva Carpeta Creada con exito");
       onClose();
       setAddFolder(!addFolder);
     } catch {
-      toast.error("Error al renombrar el archivo");
+      toast.error("Error al crear la carpeta");
     }
   };
   return (
     <Modal
-      title="Renombrar"
+      Element="form"
+      title="Nueva Carpeta"
       closeFunction={onClose}
       onSubmit={onSubmit}
-      Element="form"
     >
       <Input
+        placeholder="Nombre de la carpeta"
         errors={errors}
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Nombre del archivo"
       />
     </Modal>
   );
