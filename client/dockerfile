@@ -2,8 +2,13 @@ FROM node:lts
 
 WORKDIR /app
 
-COPY . /app/
+COPY . /app
 
 RUN npm install
 
-CMD ["npm", "run", "dev"]
+RUN npm run build
+
+EXPOSE 8000
+
+
+CMD ["node", "main.cjs"]

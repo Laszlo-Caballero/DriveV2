@@ -4,8 +4,8 @@ services:
   web:
     container_name: Drive-web
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./client
+      dockerfile: dockerfile
     ports:
       - "8000:8000"
     environment:
@@ -17,11 +17,11 @@ services:
     container_name: Drive-server
     build:
       context: ./server
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     ports:
       - "3000:3000"
     environment:
-      PATH_DRIVE: ${PATH_DRIVE}
+      PATH_DRIVE: "/app/drive"
     volumes:
       - ${PATH_DRIVE}:/app/drive
     networks:
