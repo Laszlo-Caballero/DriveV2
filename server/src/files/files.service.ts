@@ -62,6 +62,25 @@ export class FilesService {
     }
   }
 
+  async allFolders(dir: string) {
+    const decodedDir = decodeURIComponent(dir);
+
+    const path = join(this.path, decodedDir);
+
+    try {
+      const files = await readdir(path);
+      const orderFiles = this.orderFiles(files);
+
+      return {
+        message: 'Folders found',
+        statusCode: 200,
+        data: orderFiles.folders,
+      };
+    } catch {
+      throw new BadRequestException('Directory not found');
+    }
+  }
+
   async getFilePath(dir: string): Promise<string> {
     const parseDir = dir.replace('_', ' ');
     const decodedDir = decodeURIComponent(parseDir);

@@ -27,6 +27,11 @@ export class FilesController {
     return this.filesServices.allFiles(dir[0]);
   }
 
+  @Get('folder/*')
+  allFolders(@Param() dir: ParamsPath) {
+    return this.filesServices.allFolders(dir[0]);
+  }
+
   @Post('folder/*')
   createFolder(@Param() dir: ParamsPath, @Body() name: CreateFolderDto) {
     return this.filesServices.createFolder(dir[0], name.name);
