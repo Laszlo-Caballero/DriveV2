@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  web:
+    container_name: Drive-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      VITE_API_URL: ${VITE_API_URL}
+    networks:
+      - Drive-network
+
+  server:
+    container_name: Drive-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      PATH_DRIVE: ${PATH_DRIVE}
+    volumes:
+      - ${PATH_DRIVE}:/app/drive
+    networks:
+      - Drive-network
+
+networks:
+  Drive-network:
+    driver: bridge
