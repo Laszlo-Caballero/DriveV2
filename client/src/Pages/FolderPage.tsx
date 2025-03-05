@@ -22,6 +22,8 @@ export default function FolderPage() {
     }>
   > = useParams();
 
+  console.log(params);
+
   const [files, setFiles] = useState<FileUpload[]>([]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

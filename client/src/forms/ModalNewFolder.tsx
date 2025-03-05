@@ -21,6 +21,9 @@ export default function ModalNewFolder({ onClose }: Props) {
       "*": string;
     }>
   > = useParams();
+
+  console.log(params);
+
   const { addFolder, setAddFolder } = useFolder();
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
