@@ -8,9 +8,14 @@ import { useParams } from "react-router";
 interface Props {
   closeFunction: () => void;
   title: string;
+  type?: string;
 }
 
-export default function ModalDelete({ title, closeFunction }: Props) {
+export default function ModalDelete({
+  title,
+  closeFunction,
+  type = "Archivo",
+}: Props) {
   const params: Readonly<
     Partial<{
       "*": string;
@@ -31,11 +36,11 @@ export default function ModalDelete({ title, closeFunction }: Props) {
       );
       if (res.status != 200) throw new Error("Error al eliminar el archivo");
 
-      toast.success("Archivo eliminado correctamente");
+      toast.success(`${type} eliminado correctamente`);
       closeFunction();
       setDeleteFile(!deleteFile);
     } catch {
-      toast.error("Error al eliminar el archivo");
+      toast.error(`Error al eliminar el ${type}`);
     }
   };
 

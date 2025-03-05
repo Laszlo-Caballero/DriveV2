@@ -6,8 +6,8 @@ export default function Aside() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex h-full w-[408px] justify-center bg-blue-ribbon-300 py-[56px]">
-      <div className="flex flex-col items-center gap-y-5">
+    <div className="flex h-[200px] w-full items-center justify-center bg-blue-ribbon-300 lg:w-[408px] xl:h-full xl:items-start xl:py-[56px]">
+      <div className="flex items-center gap-y-5 xl:flex-col">
         <Button
           className="flex h-[66px] items-center gap-x-[20px] rounded-xl bg-blue-ribbon-400 px-[20px] font-monserrat text-2xl text-white"
           onClick={() => {

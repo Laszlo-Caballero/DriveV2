@@ -26,7 +26,7 @@ export default function File({ title }: Props) {
     >
       <span className="flex items-center gap-x-2">
         {FolderIcon(title)}
-        <p className="max-w-[50px] truncate font-monserrat text-xl xl:max-w-[90px] 2xl:max-w-[170px]">
+        <p className="max-w-[200px] truncate font-monserrat text-xl xl:max-w-[90px] 2xl:max-w-[170px]">
           {title}
         </p>
       </span>

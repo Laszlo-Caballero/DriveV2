@@ -17,7 +17,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           type="text"
           className={cn(
-            "w-[500px] rounded-lg border border-black bg-transparent p-2 text-black placeholder:text-black",
+            "w-[300px] rounded-lg border border-black bg-transparent p-2 text-black placeholder:text-black xl:w-[500px]",
             errors && "border-red-500 text-red-500 placeholder:text-red-500",
           )}
           {...props}

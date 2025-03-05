@@ -16,7 +16,7 @@ export default function FolderSelected({
   return (
     <span
       className={cx(
-        "flex w-[600px] cursor-pointer items-center gap-x-3 rounded-r-full px-1 py-2 font-monserrat text-lg hover:bg-blue-zodiac-600 hover:text-white",
+        "flex w-full cursor-pointer items-center gap-x-3 rounded-r-full px-1 py-2 font-monserrat text-lg hover:bg-blue-zodiac-600 hover:text-white xl:w-[600px]",
         selected && "bg-blue-zodiac-600 text-white",
       )}
       onMouseEnter={() => setHover(true)}

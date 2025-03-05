@@ -88,13 +88,13 @@ export default function FolderPage() {
 
       <h2 className="font-monserrat text-6xl">Unidad</h2>
 
-      <div className="mt-8 grid grid-cols-5 gap-8">
+      <div className="mt-8 flex grid-cols-5 flex-col gap-8 xl:grid">
         <h4 className="col-span-5 font-monserrat text-2xl">Carpetas</h4>
         {data?.data.folders.map((folder, i) => (
           <Folder title={folder} key={i} />
         ))}
       </div>
-      <div className="mt-8 grid grid-cols-5 gap-8">
+      <div className="mt-8 flex grid-cols-5 flex-col gap-8 xl:grid">
         <h4 className="col-span-5 font-monserrat text-2xl">Archivos</h4>
         {data?.data.files.map((folder, i) => <File title={folder} key={i} />)}
       </div>

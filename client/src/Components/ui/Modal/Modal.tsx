@@ -36,7 +36,7 @@ export default function Modal({
   return (
     <div className="fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-black bg-opacity-50">
       <Element
-        className="flex flex-col gap-y-4 rounded-2xl bg-blue-zodiac-50 p-8 font-monserrat"
+        className="flex max-w-full flex-col gap-y-4 rounded-2xl bg-blue-zodiac-50 p-8 font-monserrat"
         ref={ref as React.RefObject<HTMLDivElement & HTMLFormElement>}
         onSubmit={(e) => {
           if (Element === "form") {
