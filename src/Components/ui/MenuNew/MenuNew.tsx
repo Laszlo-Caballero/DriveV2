@@ -12,13 +12,11 @@ import { Toast } from "../Toaster/ToasterProvider";
 import { cx } from "class-variance-authority";
 
 interface Props {
-  x?: number | string;
-  y?: number | string;
   closeFunction?: () => void;
   className?: string;
 }
 
-export default function MenuClick({ x, y, className, closeFunction }: Props) {
+export default function MenuNew({ className, closeFunction }: Props) {
   const ref = useCloseDiv({ closeFunction });
   const [openNewFolder, setOpenNewFolder] = useState(false);
   const refInput = useRef<HTMLInputElement>(null);
@@ -34,13 +32,9 @@ export default function MenuClick({ x, y, className, closeFunction }: Props) {
   return (
     <div
       className={cx(
-        "fixed z-10 flex flex-col rounded-xl bg-blue-zodiac-100 font-monserrat text-xl",
+        "z-10 flex flex-col rounded-xl bg-blue-zodiac-100 font-monserrat text-xl",
         className,
       )}
-      style={{
-        left: typeof x === "string" ? x : `${x}px`,
-        top: typeof y === "string" ? y : `${y}px`,
-      }}
       ref={ref}
     >
       <input
@@ -68,7 +62,9 @@ export default function MenuClick({ x, y, className, closeFunction }: Props) {
       <Option
         icon={<UploadFolder strokeWidth={2} />}
         label="Crear Carpeta"
-        onClick={() => setOpenNewFolder(true)}
+        onClick={() => {
+          setOpenNewFolder(true);
+        }}
       />
       <Option
         icon={<UploadFileModal strokeWidth={2} />}
