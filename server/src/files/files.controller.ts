@@ -17,6 +17,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { DeleteFilesDto } from './dto/deleteFiles.dto';
 import { Response } from 'express';
 import { RenameFileDto } from './dto/renameFile.dto';
+import { MoveFileDto } from './dto/file.dto';
 
 @Controller('files')
 export class FilesController {
@@ -60,5 +61,10 @@ export class FilesController {
   @Put('rename/*')
   async renameFile(@Param() dir: ParamsPath, @Body() files: RenameFileDto) {
     return this.filesServices.renameFile(dir[0], files);
+  }
+
+  @Put('move/*')
+  async moveFile(@Param() dir: ParamsPath, @Body() file: MoveFileDto) {
+    return this.filesServices.moveFile(dir[0], file);
   }
 }

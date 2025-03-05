@@ -16,6 +16,7 @@ import { existsSync } from 'fs';
 import { DeleteFilesDto } from './dto/deleteFiles.dto';
 import { accessSync } from 'node:fs';
 import { RenameFileDto } from './dto/renameFile.dto';
+import { MoveFileDto } from './dto/file.dto';
 
 @Injectable()
 export class FilesService {
@@ -192,6 +193,38 @@ export class FilesService {
 
       return {
         message: 'File renamed',
+        statusCode: 200,
+      };
+    } catch {
+      throw new BadRequestException('File not found');
+    }
+  }
+
+  async moveFile(dir: string, file: MoveFileDto) {
+    const decodedDir = decodeURIComponent(dir);
+    const path = join(this.path, decodedDir);
+
+    const isExist = existsSync(path);
+
+    if (!isExist) {
+      throw new BadRequestException('Directory not found');
+    }
+
+    const toPath = join(this.path, decodedDir, file.folder);
+    const isExistFolder = existsSync(toPath);
+
+    if (!isExistFolder) {
+      throw new BadRequestException('Folder not found');
+    }
+
+    try {
+      const oldPath = join(path, file.name);
+      const newPath = join(path, file.folder, file.name);
+
+      await rename(oldPath, newPath);
+
+      return {
+        message: 'File moved',
         statusCode: 200,
       };
     } catch {

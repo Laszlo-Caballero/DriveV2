@@ -3,7 +3,7 @@ import { FormEvent, ReactNode, useEffect, useRef } from "react";
 interface Props {
   closeFunction?: () => void;
   submitFunction?: () => void;
-  onSubmit?: (e: FormEvent) => void;
+  onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
   title?: string;
   children?: ReactNode;
   Element?: "div" | "form";
@@ -40,7 +40,7 @@ export default function Modal({
         ref={ref as React.RefObject<HTMLDivElement & HTMLFormElement>}
         onSubmit={(e) => {
           if (Element === "form") {
-            onSubmit?.(e);
+            onSubmit?.(e as FormEvent<HTMLFormElement>);
           }
         }}
       >

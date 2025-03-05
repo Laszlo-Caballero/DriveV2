@@ -4,6 +4,7 @@ import { FolderIcon } from "./FolderParser";
 import MenuFile from "../MenuFile/MenuFile";
 import ModalDelete from "@/forms/ModalDelete";
 import ModalRename from "@/forms/ModalRename";
+import ModalMoveFile from "@/forms/ModalMoveFile";
 
 interface Props {
   title: string;
@@ -41,6 +42,7 @@ export default function File({ title }: Props) {
           title={title}
           openDeleteModal={() => setModalDelete(true)}
           openChangeNameModal={() => setModalRename(true)}
+          openMoveModal={() => setModalMove(true)}
         />
       )}
 
@@ -55,6 +57,10 @@ export default function File({ title }: Props) {
 
       {modalRename && (
         <ModalRename title={title} onClose={() => setModalRename(false)} />
+      )}
+
+      {modalMove && (
+        <ModalMoveFile file={title} onClose={() => setModalMove(false)} />
       )}
     </div>
   );
