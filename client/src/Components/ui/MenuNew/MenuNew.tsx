@@ -10,6 +10,8 @@ import axios from "axios";
 import { config } from "@/config/config";
 import { Toast } from "../Toaster/ToasterProvider";
 import { cx } from "class-variance-authority";
+import { useMutation } from "@/hooks/useMutation";
+import Load from "../Load/Load";
 
 interface Props {
   closeFunction?: () => void;
@@ -28,6 +30,29 @@ export default function MenuNew({ className, closeFunction }: Props) {
       "*": string;
     }>
   > = useParams();
+  const { mutate, isLoading } = useMutation<unknown, { data: File }>({
+    mutationFn: async ({ data }) => {
+      const formData = new FormData();
+      formData.append("files", data);
+      await axios.post(
+        `${config.apiUrl}/files/upload/${params["*"]}`,
+        formData,
+      );
+    },
+    onSuccess: () => {
+      toast.success("Archivo subido correctamente");
+      setAddFolder(!addFolder);
+      closeFunction?.();
+    },
+    onError: () => {
+      toast.error("Error al subir el archivo");
+    },
+  });
+
+  if (isLoading) {
+    console.log("loading...");
+    return <Load />;
+  }
 
   return (
     <div
@@ -42,18 +67,10 @@ export default function MenuNew({ className, closeFunction }: Props) {
         className="hidden"
         ref={refInput}
         onChange={async (e) => {
-          const formData = new FormData();
-          formData.append("files", e.target.files?.[0] as File);
-          try {
-            await axios.post(
-              `${config.apiUrl}/files/upload/${params["*"]}`,
-              formData,
-            );
-            setAddFolder(!addFolder);
-            toast.success("Archivo subido correctamente");
-            closeFunction?.();
-          } catch {
-            toast.error("Error al subir el archivo");
+          const files = e.target.files;
+          if (files) {
+            const file = files[0];
+            mutate({ data: file });
           }
         }}
         multiple={false}
